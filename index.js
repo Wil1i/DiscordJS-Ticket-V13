@@ -1,13 +1,16 @@
+// Import needed packages
 const { Client, Intents, Collection } = require("discord.js");
 const { red, green, yellow } = require("chalk");
 const config = require("./config.json");
 const db = require("quick.db");
 const fs = require("fs");
 
+// Create client with needed intents
 const client = new Client({
   intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES],
 });
 
+// Register commands and events
 let registeredCommands = 0;
 let registeredSCommands = 0;
 let registeredEvents = 0;
@@ -30,6 +33,7 @@ const sCommandsFile = fs
   .readdirSync("./items/slashCommands")
   .filter((file) => file.endsWith(".js"));
 
+// Call ready event
 client.on("ready", () => {
   console.log(
     red(`\n[READY]`),
@@ -62,8 +66,9 @@ client.on("ready", () => {
   client.events.get("ready").execute(client);
 });
 
-client.login(config.token);
+client.login(config.token); // Run bot with token in config.json file
 
+// Read and register commands & events
 for (const command of commandsFile) {
   const rCommand = require(`./items/commands/${command}`);
   if (rCommand.name && rCommand.execute) {
@@ -127,6 +132,7 @@ for (const command of sCommandsFile) {
   }
 }
 
+// Event for when user used a command
 client.on("messageCreate", (message) => {
   if (!message.content.startsWith(db.get("prefix"))) return;
   const prefix = db.get("prefix");
@@ -136,6 +142,7 @@ client.on("messageCreate", (message) => {
   client.commands.get(cmd).execute(client, message);
 });
 
+// Event for when user clicked to buttons
 client.on("interactionCreate", async (interaction) => {
   client.events.get("interactionCreate").execute(client, interaction);
 });

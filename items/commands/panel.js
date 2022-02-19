@@ -13,6 +13,7 @@ module.exports = {
   execute(client, message) {
     const canSeeTicket = config.roles.seeticket;
 
+    // This command needs administrator permission
     if (
       !message.member.roles.cache.has(canSeeTicket) &&
       !message.member.permissions.has(Permissions.FLAGS.ADMINISTRATOR)
@@ -26,6 +27,7 @@ module.exports = {
       .setAuthor("Ticket Panel");
 
     if (db.has("channel")) {
+      // Check if panel channel id exist
       const ticketChannel = client.channels.cache.get(db.get("channel"));
       if (!ticketChannel) return;
 

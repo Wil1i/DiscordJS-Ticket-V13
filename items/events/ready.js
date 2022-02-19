@@ -7,6 +7,7 @@ module.exports = {
     description : "Handle when bot is ready",
     execute(client){
 
+        // First config for database (If can't find this data in database)
         if(!db.has("prefix")) db.set("prefix", config.prefix);
         if(!db.has("color")) db.set("color", config.color);
         if(!db.has("footer")) db.set("footer", config.footer);
@@ -16,6 +17,7 @@ module.exports = {
         if(!db.has("ticket-parent-normal")) db.set("ticket-parent-normal", config.parents.normal);
         if(!db.has("ticket-parent-close")) db.set("ticket-parent-close", config.parents.closed);
 
+        // If can't find ticket and can find ticket channel, send panel automaticly
         if(!db.has("ticket") && db.has("channel")){
 
             const ticketChannel = client.channels.cache.get(db.get("channel"))

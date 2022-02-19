@@ -6,6 +6,7 @@ module.exports = {
   description: "Setup an ticket system",
   rank: "admin",
   execute(client, message) {
+    // Need Administrator permission to run this command
     if (
       !message.member.permissions.has(Discord.Permissions.FLAGS.ADMINISTRATOR)
     )
@@ -17,6 +18,7 @@ module.exports = {
       .setAuthor("Ticket System")
       .setFooter(db.get("footer"));
 
+    // Available items for setup
     const avItems = [
       "footer",
       "prefix",
@@ -30,8 +32,8 @@ module.exports = {
       "ticket-parent-closed",
     ];
 
-    if (messageArry[2] && avItems.includes(messageArry[1].toLowerCase())) {
-      db.set(
+    if (messageArry[2] && avItems.includes(messageArry[1].toLowerCase())) { // If user entered setup name and setup value and setup found
+      db.set( // Update target setup
         messageArry[1].toLowerCase(),
         message.content.replace(`${messageArry[0]} ${messageArry[1]} `, "")
       );
