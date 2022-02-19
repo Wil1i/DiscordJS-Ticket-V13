@@ -1,0 +1,15 @@
+{
+  "token": "BOT TOKEN",
+  "prefix": "BOT PREFIX",
+  "color": "COLOR HEX",
+  "footer": "FOOTER TEXT",
+
+  "roles": {
+    "seeticket": "ROLE FOR SEE AND MANAGE TICKET"
+  },
+
+  "parents": {
+    "normal": "PARENT ID FOR NORMAL TICKETS",
+    "closed" : "PAREENT ID FOR CLOSED TICKETS"
+  }
+}
