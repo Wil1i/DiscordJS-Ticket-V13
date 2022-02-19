@@ -10,7 +10,8 @@ This is a full Discord.JS Ticket system and fully customizable
 [HTML Page Logger](https://github.com/Code-Williams/DiscordJS-Ticket-V13/blob/master/items/events/fetchMessage1.js) => Logs all ticket messages to an HTML page
 
 ## How to run
-1- First, make a copy from `config.sample.json` file and save it with `config.json` and open it\
-2- Enter anything `config.json` file wants and then save & close\
-3- Run bot using dbClick on `run.bat`\
-4- Go to your server where is your bot is already joined and setup bot using [prefix]setup command
+**1-** First, make a copy from `config.sample.json` file and save it with `config.json` and open it\
+**2-** Enter anything `config.json` file wants and then save & close\
+**3-** Run bot using dbClick on `run.bat`\
+**4-** Go to your server where is your bot is already joined into and setup bot using `[PREFIX]setup` command\
+**5-** Create your ticket panel by using `[PREFIX]panel` command
