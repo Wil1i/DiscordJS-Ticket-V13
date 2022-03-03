@@ -12,25 +12,19 @@ const client = new Client({
 
 // Register commands and events
 let registeredCommands = 0;
-let registeredSCommands = 0;
 let registeredEvents = 0;
 
 let problemCommands = 0;
-let problemSCommands = 0;
 let problemEvents = 0;
 
 client.commands = new Collection();
 client.events = new Collection();
-client.slashCommands = new Collection();
 
 const commandsFile = fs
   .readdirSync("./items/commands")
   .filter((file) => file.endsWith(".js"));
 const eventsFile = fs
   .readdirSync("./items/events")
-  .filter((file) => file.endsWith(".js"));
-const sCommandsFile = fs
-  .readdirSync("./items/slashCommands")
   .filter((file) => file.endsWith(".js"));
 
 // Call ready event
@@ -51,18 +45,8 @@ client.on("ready", () => {
     green(`Registered Events: `),
     red(registeredEvents)
   );
-  console.log(
-    red(`[INFO]`),
-    green(`Registered Slash Commands: `),
-    red(registeredSCommands)
-  );
   console.log(red(`[INFO]`), green(`Problem Commands: `), red(problemCommands));
   console.log(red(`[INFO]`), green(`Problem Events: `), red(problemEvents));
-  console.log(
-    red(`[INFO]`),
-    green(`Problem Slash Commands: `),
-    red(problemSCommands)
-  );
   client.events.get("ready").execute(client);
 });
 
@@ -108,27 +92,6 @@ for (const event of eventsFile) {
       red(event.replace(`.js`, ""))
     );
     problemEvents++;
-  }
-}
-
-for (const command of sCommandsFile) {
-  const rCommand = require(`./items/slashCommands/${command}`);
-  if (rCommand.name && rCommand.execute) {
-    client.slashCommands.set(rCommand.name, rCommand);
-    console.log(
-      red("[REGISTERING]"),
-      green(`Slash Command `),
-      red(rCommand.name),
-      green(` Registered`)
-    );
-    registeredSCommands++;
-  } else {
-    console.log(
-      red("[REGISTERING]"),
-      yellow(`Can't Register Slash Command `),
-      red(command.replace(`.js`, ""))
-    );
-    problemSCommands++;
   }
 }
 
